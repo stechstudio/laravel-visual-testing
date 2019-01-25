@@ -84,4 +84,10 @@ OK (1 test, 1 assertion)
 [percy] finalized build #1
 ```
 
-Now go check out your Percy dashboard, and you should see the new build. At this point it won't have anything to compare the snapshot to, but it will on the next run.
+Now go check out your Percy dashboard, and you should see the new build. 
+
+![](docs/first-run.png)
+
+At this point it won't have anything to compare the snapshot to. But if you go modify the `welcome.blade.php` file and run it again, you'll get a nice visual diff of your change.
+
+![](docs/second-run.png)
