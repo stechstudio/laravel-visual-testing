@@ -57,13 +57,11 @@ public function testBasicExample()
 }
 ```
 
-Now go run your test, this time wrap it with a call to `percy exec`:
+Now go run your test:
 
 ```
-npx percy exec -- php artisan dusk
+php artisan dusk
 ```
-
-*Note the two dashes there in the middle, and the spaces around them!*
 
 If all goes well, you should see output similar to this:
 
@@ -91,3 +89,7 @@ Now go check out your Percy dashboard, and you should see the new build.
 At this point it won't have anything to compare the snapshot to. But if you go modify the `welcome.blade.php` file and run it again, you'll get a nice visual diff of your change.
 
 ![](docs/second-run.png)
+
+## Skip snapshots
+
+Sometimes you may want to run dusk tests without taking snapshots. You can use the `--without-percy` option to disable percy snapshots on a given test run. 

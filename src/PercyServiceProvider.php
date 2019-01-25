@@ -1,40 +1,59 @@
 <?php
+
 namespace STS\Percy;
 
 use Illuminate\Support\ServiceProvider;
 use Laravel\Dusk\Browser;
+use STS\Percy\Console\DuskCommand;
+use STS\Percy\Console\DuskFailsCommand;
 
 class PercyServiceProvider extends ServiceProvider
 {
+    /**
+     * Bootstrap any package services.
+     *
+     * @return void
+     */
     public function boot()
     {
         $this->publishes([
-            __DIR__.'/../config/percy.php' => config_path('percy.php'),
+            __DIR__ . '/../config/percy.php' => config_path('percy.php'),
         ]);
     }
 
+    /**
+     * Register any package services.
+     *
+     * @return void
+     */
     public function register()
     {
         $this->mergeConfigFrom(
-            __DIR__.'/../config/percy.php', 'percy'
+            __DIR__ . '/../config/percy.php', 'percy'
         );
 
-        Browser::macro('percySnapshot', function($name, $options = []) {
-            $this->script([
-                file_get_contents(config('percy.agent_path')),
-                sprintf(
-                    "const percyAgentClient = new PercyAgent('%s'); percyAgentClient.snapshot(%s, %s)",
-                    config('percy.client_info'),
-                    json_encode($name),
-                    json_encode($options)
-                )
+        // Extend and override the base dusk commands
+        if ($this->app->runningInConsole()) {
+            $this->commands([
+                DuskCommand::class,
+                DuskFailsCommand::class
             ]);
+        }
 
-            // Gotta give it just a bit to breath. Otherwise we risk the browser disconnecting
-            // before Percy loads and has time to take the snapshot.
-            $this->pause(100);
-
-            return $this;
+        $this->app->singleton(Agent::class, function () {
+            return new Agent(config('percy.agent_path'), config('percy.client_info'));
         });
+
+        Browser::macro('percySnapshot', function ($name, $options = []) {
+            return app(Agent::class)->snapshot($this, $name, $options);
+        });
+    }
+
+    /**
+     * @return array
+     */
+    public function provides()
+    {
+        return [Agent::class];
     }
 }
