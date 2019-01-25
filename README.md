@@ -66,7 +66,7 @@ php artisan dusk
 If all goes well, you should see output similar to this:
 
 ```
-$ npx percy exec -- php artisan dusk
+$ php artisan dusk
 [percy] created build #1
 [percy] percy has started.
 
@@ -92,4 +92,4 @@ At this point it won't have anything to compare the snapshot to. But if you go m
 
 ## Skip snapshots
 
-Sometimes you may want to run dusk tests without taking snapshots. You can use the `--without-percy` option to disable percy snapshots on a given test run. 
+Sometimes you may want to run dusk tests without taking snapshots. You can use the `--without-percy` option when running `dusk` or `dusk:fails` to disable percy snapshots. 
