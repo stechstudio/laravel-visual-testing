@@ -10,17 +10,19 @@ This package extends Dusk with the ability to do visual diffs, by using the [Per
 
 1. Sign up for a free account at [percy.io](https://percy.io) and create your first project.
 
-2. Install the [`@percy/agent`](https://www.npmjs.com/package/@percy/agent) package.
+2. Put your `PERCY_TOKEN` in your .env file. If you are using [specific dusk environment files](https://laravel.com/docs/5.7/dusk#environment-handling), make sure to include this token.
+
+    ```
+    PERCY_TOKEN=aaabbbcccdddeeefff
+    ```
+
+3. Install the [`@percy/agent`](https://www.npmjs.com/package/@percy/agent) package.
 
     ```
     npm install --save-dev @percy/agent
     ```
     
-3. Set up your [`PERCY_TOKEN` environment variable](https://docs.percy.io/docs/environment-variables). 
 
-    ```
-    $ export PERCY_TOKEN=aaabbbcccdddeeefff
-    ```
     
 ## Package setup
 
