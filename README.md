@@ -62,7 +62,7 @@ a snapshot all the time, make sure you snapshot right after calling `visit`, bef
 Now go run your test, this time wrap it with a call to `percy exec`:
 
 ```
-npx percy exec -- php artisan duck
+npx percy exec -- php artisan dusk
 ```
 
 *Note the two dashes there in the middle, and the spaces around them!*
