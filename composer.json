@@ -1,0 +1,25 @@
+{
+    "name": "stechstudio/laravel-percy",
+    "description": "Integrates percy.io with Laravel Dusk for easy snapshot testing",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Joseph Szobody",
+            "email": "joseph@stechstudio.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "STS\\Percy\\": "src"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "STS\\Percy\\PercyServiceProvider"
+            ]
+        }
+    }
+}
