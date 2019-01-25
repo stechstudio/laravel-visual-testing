@@ -8,7 +8,7 @@ This package extends Dusk with the ability to do visual diffs, by using the [Per
 
 ## Percy setup
 
-1. Sign up for a free account at [percy.io](https://percy.io)
+1. Sign up for a free account at [percy.io](https://percy.io) and create your first project.
 
 2. Install the [`@percy/agent`](https://www.npmjs.com/package/@percy/agent) package.
 
@@ -43,21 +43,19 @@ This package extends Dusk with the ability to do visual diffs, by using the [Per
 
 Make sure you have completed the [Laravel Dusk installation steps](https://laravel.com/docs/master/dusk#installation), and you can run the example test with `php artisan dusk`.
 
-Open the example test at `tests/Browser/ExampleTest.php`. Add a call to `percySnapshot()` after the assertion, and pass in a name for your snapshot.
+Open the example test at `tests/Browser/ExampleTest.php`. Add a call to `percySnapshot()` right after the `visit`, and pass in a name for your snapshot.
 
 ```php
 public function testBasicExample()
 {
     $this->browse(function (Browser $browser) {
         $browser->visit('/')
-                ->assertSee('Laravel')
-                ->percySnapshot('basic-example'); // <-- add this
+            ->percySnapshot('basic-example') // <-- add this
+            ->assertSee('Laravel');
+                
     });
 }
 ```
-
-*Note: putting the snapshot after your assertion means the snapshot will NOT occur if the assertion fails. If you want 
-a snapshot all the time, make sure you snapshot right after calling `visit`, before any other assertions.*
 
 Now go run your test, this time wrap it with a call to `percy exec`:
 
