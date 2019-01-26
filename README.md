@@ -2,9 +2,11 @@
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/stechstudio/laravel-percy.svg?style=flat-square)](https://packagist.org/packages/stechstudio/laravel-percy)
 [![Total Downloads](https://img.shields.io/packagist/dt/stechstudio/laravel-percy.svg?style=flat-square)](https://packagist.org/packages/stechstudio/laravel-percy)
 
-[Laravel Dusk](https://laravel.com/docs/master/dusk) is a fantastic way to write browser tests for your Laravel app. 
+Laravel makes it easy to write tests. Support for unit and feature (integration) testing is provided out of the box. Additionally, you can control a real browser for end-to-end testing with [Laravel Dusk](https://laravel.com/docs/master/dusk).
 
-This package extends Dusk with the ability to do visual diffs with the [Percy visual testing](https://percy.io/) platform.
+This package extends Dusk with the ability to do visual diffs with the [Percy visual testing](https://percy.io/) platform. 
+
+This form of testing is commonly referred to as snapshot testing, and is very useful in cases where you want to guard against unexpected changed to your UI. Snapshot testing is not meant to replace your unit/feature/browser tests, but rather provide another tool in your testing toolbox. 
 
 ## Installation and setup
 
