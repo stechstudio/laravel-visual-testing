@@ -4,46 +4,45 @@
 
 [Laravel Dusk](https://laravel.com/docs/master/dusk) is a fantastic way to write browser tests for your Laravel app. 
 
-This package extends Dusk with the ability to do visual diffs, by using the [Percy visual testing](https://percy.io/) platform.
+This package extends Dusk with the ability to do visual diffs with the [Percy visual testing](https://percy.io/) platform.
 
-## Percy setup
+## Installation and setup
+
+We are assuming you have already completed the [Laravel Dusk installation steps](https://laravel.com/docs/master/dusk#installation), and you can run the example test with `php artisan dusk`.
+
+Next:
 
 1. Sign up for a free account at [percy.io](https://percy.io) and create your first project.
 
-2. Put your `PERCY_TOKEN` in your .env file. If you are using [specific dusk environment files](https://laravel.com/docs/5.7/dusk#environment-handling), make sure to include this token.
+2. Put your `PERCY_TOKEN` in your Laravel .env file. If you are using [specific dusk environment files](https://laravel.com/docs/5.7/dusk#environment-handling), make sure to include this token.
 
     ```
     PERCY_TOKEN=aaabbbcccdddeeefff
     ```
 
-3. Install the [`@percy/agent`](https://www.npmjs.com/package/@percy/agent) package.
+3. Install the [`@percy/agent`](https://www.npmjs.com/package/@percy/agent) NPM package.
 
     ```
     npm install --save-dev @percy/agent
     ```
     
-
-    
-## Package setup
-
-1. Install with composer.
+4. Install this composer package.
 
     ```
     composer require stechstudio/laravel-percy --dev
     ```
-    
-2. If you're running Laravel 5.5, you're done. For Laravel 5.4 and earlier, add the service provider to `config/app.php`.
 
-    ```php
-    'providers' => [
-        ...
-        STS\Percy\PercyServiceProvider::class,
-    ],
-    ``` 
-    
 ## How to use
 
-Make sure you have completed the [Laravel Dusk installation steps](https://laravel.com/docs/master/dusk#installation), and you can run the example test with `php artisan dusk`.
+You can now call `->percySnapshot('snapshot-name')` on the browser instance in any of your dusk tests. 
+
+Then run your test suite like your normally would with `php artisan dusk`.
+
+## Options
+
+Sometimes you may want to run dusk tests without taking snapshots. You can use the `--without-percy` option when running `dusk` or `dusk:fails` to disable percy snapshots. 
+
+## Example
 
 Open the example test at `tests/Browser/ExampleTest.php`. Add a call to `percySnapshot()` right after the `visit`, and pass in a name for your snapshot.
 
@@ -91,7 +90,3 @@ Now go check out your Percy dashboard, and you should see the new build.
 At this point it won't have anything to compare the snapshot to. But if you go modify the `welcome.blade.php` file and run it again, you'll get a nice visual diff of your change.
 
 ![](docs/second-run.png)
-
-## Skip snapshots
-
-Sometimes you may want to run dusk tests without taking snapshots. You can use the `--without-percy` option when running `dusk` or `dusk:fails` to disable percy snapshots. 
