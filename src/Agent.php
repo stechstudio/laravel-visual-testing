@@ -7,18 +7,18 @@ use Laravel\Dusk\Browser;
 class Agent
 {
     /** @var string */
-    protected $jsPath;
+    protected $jsAgentPath;
 
     /** @var string */
     protected $clientInfo;
 
     /**
-     * @param $jsPath
+     * @param $jsAgentPath
      * @param $clientInfo
      */
-    public function __construct($jsPath, $clientInfo)
+    public function __construct($jsAgentPath, $clientInfo)
     {
-        $this->jsPath = $jsPath;
+        $this->jsAgentPath = $jsAgentPath;
         $this->clientInfo = $clientInfo;
     }
 
@@ -32,7 +32,7 @@ class Agent
     public function snapshot(Browser $browser, $name, $options = [])
     {
         $browser->script([
-            file_get_contents($this->jsPath),
+            file_get_contents($this->jsAgentPath),
             sprintf(
                 "const percyAgentClient = new PercyAgent('%s'); percyAgentClient.snapshot(%s, %s)",
                 $this->clientInfo,
