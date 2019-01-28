@@ -14,7 +14,8 @@ class DuskCommand extends BaseDuskCommand
      */
     protected $signature = 'dusk 
                             {--without-tty : Disable output to TTY}
-                            {--without-percy : Disable percy snapshots}';
+                            {--without-percy : Disable percy snapshots}
+                            {--percy-target-branch : Set the base branch for comparison}';
 
 
     /**
@@ -67,9 +68,20 @@ class DuskCommand extends BaseDuskCommand
      */
     protected function env()
     {
-        return [
-            'PERCY_TOKEN' => env('PERCY_TOKEN')
-        ];
+        return array_filter([
+            'PERCY_TOKEN' => env('PERCY_TOKEN'),
+            'PERCY_TARGET_BRANCH' => $this->baseBranch()
+        ]);
+    }
+
+    /**
+     * @return string|null
+     */
+    protected function baseBranch()
+    {
+        return $this->hasOption('percy-target-branch')
+            ? $this->option('percy-target-branch')
+            : env('PERCY_TARGET_BRANCH');
     }
 
     /**
@@ -89,7 +101,7 @@ class DuskCommand extends BaseDuskCommand
     {
         return array_diff(
             array_slice($_SERVER['argv'], 2),
-            ['--without-tty', '--without-percy']
+            ['--without-tty', '--without-percy', '--percy-target-branch']
         );
     }
 }
