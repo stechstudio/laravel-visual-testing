@@ -12,17 +12,27 @@ class Agent
     /** @var string */
     protected $clientInfo;
 
+    /** @var string */
+    protected $environmentInfo;
+
+    /** @var array */
+    protected $options;
+
     /** @var array */
     protected $generatedNames = [];
 
     /**
-     * @param $jsAgentPath
-     * @param $clientInfo
+     * @param string $jsAgentPath
+     * @param string $clientInfo
+     * @param $environmentInfo
+     * @param array $options
      */
-    public function __construct($jsAgentPath, $clientInfo)
+    public function __construct($jsAgentPath, $clientInfo, $environmentInfo, $options = [])
     {
         $this->jsAgentPath = $jsAgentPath;
         $this->clientInfo = $clientInfo;
+        $this->environmentInfo = $environmentInfo;
+        $this->options = $options;
     }
 
     /**
@@ -38,9 +48,12 @@ class Agent
             file_get_contents($this->jsAgentPath),
             sprintf(
                 "const percyAgentClient = new PercyAgent('%s'); percyAgentClient.snapshot(%s, %s)",
-                $this->clientInfo,
+                json_encode([
+                    'clientInfo' => $this->clientInfo,
+                    'environmentInfo' => $this->environmentInfo
+                ]),
                 json_encode($this->name($browser, $name)),
-                json_encode($options)
+                json_encode($this->options($options))
             )
         ]);
 
@@ -52,8 +65,18 @@ class Agent
     }
 
     /**
+     * @param array $options
+     *
+     * @return array
+     */
+    protected function options($options = [])
+    {
+        return array_merge($this->options, $options);
+    }
+
+    /**
      * @param Browser $browser
-     * @param null $name
+     * @param $name
      *
      * @return string
      */

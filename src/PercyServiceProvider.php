@@ -41,7 +41,12 @@ class PercyServiceProvider extends ServiceProvider
         }
 
         $this->app->singleton(Agent::class, function () {
-            return new Agent(config('percy.agent_path'), config('percy.client_info'));
+            return new Agent(
+                config('percy.agent_path'),
+                config('percy.client_info'),
+                config('percy.environment_info'),
+                config('percy.snapshot_options')
+            );
         });
 
         Browser::macro('percySnapshot', function ($name = null, $options = []) {

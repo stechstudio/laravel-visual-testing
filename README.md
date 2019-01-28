@@ -52,17 +52,29 @@ $browser->visit('/auth/login')
 
 Then run your test suite like your normally would.
  
-```php
+```
 php artisan dusk
 ```
 
 ### Naming your snapshots
 
-By default the name of your snapshot will be the relative URL of the page (e.g. `/auth/login`). You can optionally pass in a name when taking the snapshot.
+By default the name of your snapshot will be the relative URL of the page (e.g. `/auth/login`). You can also pass in your own name when taking the snapshot.
 
 ```php
 $browser->visit('/auth/login')
     ->percySnapshot('Login page');
+```
+
+### Snapshot options
+
+You can pass in an array of options when taking a snapshot:
+
+- `widths`: An array of integers representing the browser widths at which you want to take snapshots.
+- `minHeight`: An integer specifying the minimum height of the resulting snapshot, in pixels. Defaults to 1024px.
+
+```php
+$browser->visit('/auth/login')
+    ->percySnapshot('Login page', [ widths: [768, 992, 1200] ]);
 ```
 
 ### Disabling percy snapshots
