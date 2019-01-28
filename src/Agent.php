@@ -44,24 +44,35 @@ class Agent
      */
     public function snapshot(Browser $browser, $name = null, $options = [])
     {
-        $browser->script([
-            file_get_contents($this->jsAgentPath),
-            sprintf(
-                "const percyAgentClient = new PercyAgent('%s'); percyAgentClient.snapshot(%s, %s)",
-                json_encode([
-                    'clientInfo' => $this->clientInfo,
-                    'environmentInfo' => $this->environmentInfo
-                ]),
-                json_encode($this->name($browser, $name)),
-                json_encode($this->options($options))
-            )
-        ]);
+        $browser->script(
+            $this->getScript($browser, $name, $options)->toArray()
+        );
 
         // Gotta give it just a bit to breath. Otherwise we risk the browser disconnecting
         // before Percy loads and has time to take the snapshot.
         $browser->pause(100);
 
         return $browser;
+    }
+
+    /**
+     * @param Browser $browser
+     * @param $name
+     * @param array $options
+     *
+     * @return Script
+     */
+    public function getScript(Browser $browser, $name = null, $options = [])
+    {
+        return new Script(
+            file_get_contents($this->jsAgentPath),
+            [
+                'clientInfo' => $this->clientInfo,
+                'environmentInfo' => $this->environmentInfo
+            ],
+            $this->name($browser, $name),
+            $this->options($options)
+        );
     }
 
     /**

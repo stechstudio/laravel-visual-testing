@@ -1,4 +1,4 @@
-# Visual regression UI testing for Laravel Dusk
+# Visual UI testing for Laravel Dusk
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/stechstudio/laravel-percy.svg?style=flat-square)](https://packagist.org/packages/stechstudio/laravel-percy)
 [![Quality Score](https://img.shields.io/scrutinizer/g/stechstudio/laravel-percy.svg?style=flat-square)](https://scrutinizer-ci.com/g/stechstudio/laravel-percy)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
@@ -29,13 +29,13 @@ Next:
     PERCY_TOKEN=aaabbbcccdddeeefff
     ```
 
-3. Install the [`@percy/agent`](https://www.npmjs.com/package/@percy/agent) NPM package.
+2. Install the [`@percy/agent`](https://www.npmjs.com/package/@percy/agent) NPM package.
 
     ```
     npm install --save-dev @percy/agent
     ```
     
-4. Install this composer package.
+3. Install this composer package.
 
     ```
     composer require stechstudio/laravel-percy --dev
@@ -47,7 +47,7 @@ To take a snapshot call `percySnapshot()` on the browser instance in any of your
 
 ```php
 $browser->visit('/auth/login')
-    ->percySnapshot();
+        ->percySnapshot();
 ```
 
 Then run your test suite like your normally would.
@@ -62,7 +62,7 @@ By default the name of your snapshot will be the relative URL of the page (e.g. 
 
 ```php
 $browser->visit('/auth/login')
-    ->percySnapshot('Login page');
+        ->percySnapshot('Login page');
 ```
 
 ### Snapshot options
@@ -74,10 +74,10 @@ You can pass in an array of options when taking a snapshot:
 
 ```php
 $browser->visit('/auth/login')
-    ->percySnapshot('Login page', [ widths: [768, 992, 1200] ]);
+        ->percySnapshot('Login page', [ widths: [768, 992, 1200] ]);
 ```
 
-### Disabling percy snapshots
+### Disabling snapshots
 
 If you want to run your tests without snapshots, use the `--without-percy` command line option.
 
@@ -85,7 +85,7 @@ If you want to run your tests without snapshots, use the `--without-percy` comma
 
 [Percy uses a variety of strategies to determine the optimal base build for comparison](https://docs.percy.io/docs/baseline-picking-logic).
 
-You can also override this and specify your own base build by setting `PERCY_TARGET_BRANCH` in your .env file, or using the `--percy-target-branch` command line option.
+You can override this and specify your own base build by setting `PERCY_TARGET_BRANCH` in your .env file, or using the command line option `--percy-target-branch`.
 
 ## Example
 

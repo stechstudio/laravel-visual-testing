@@ -9,10 +9,21 @@
             "email": "joseph@stechstudio.com"
         }
     ],
-    "require": {},
+    "require": {
+        "laravel/dusk": "1.*|2.*|3.*|4.*"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^3.7",
+        "phpunit/phpunit": "^7.5"
+    },
     "autoload": {
         "psr-4": {
             "STS\\Percy\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "STS\\Percy\\Tests\\": "tests"
         }
     },
     "extra": {
