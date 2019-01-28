@@ -29,7 +29,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "STS\\VisualTesting\\ServiceProvider"
+                "STS\\VisualTesting\\VisualTestingServiceProvider"
             ]
         }
     }
