@@ -12,6 +12,9 @@ class Agent
     /** @var string */
     protected $clientInfo;
 
+    /** @var array */
+    protected $generatedNames = [];
+
     /**
      * @param $jsAgentPath
      * @param $clientInfo
@@ -29,14 +32,14 @@ class Agent
      *
      * @return Browser
      */
-    public function snapshot(Browser $browser, $name, $options = [])
+    public function snapshot(Browser $browser, $name = null, $options = [])
     {
         $browser->script([
             file_get_contents($this->jsAgentPath),
             sprintf(
                 "const percyAgentClient = new PercyAgent('%s'); percyAgentClient.snapshot(%s, %s)",
                 $this->clientInfo,
-                json_encode($name),
+                json_encode($this->name($browser, $name)),
                 json_encode($options)
             )
         ]);
@@ -46,5 +49,34 @@ class Agent
         $browser->pause(100);
 
         return $browser;
+    }
+
+    /**
+     * @param Browser $browser
+     * @param null $name
+     *
+     * @return string
+     */
+    protected function name(Browser $browser, $name = null)
+    {
+        return $name == null
+            ? $this->generateName($browser)
+            : $name;
+    }
+
+    /**
+     * @param Browser $browser
+     *
+     * @return string
+     */
+    protected function generateName(Browser $browser)
+    {
+        $name = str_replace($browser::$baseUrl, '', $browser->driver->getCurrentURL());
+
+        $this->generatedNames[$name] = array_get($this->generatedNames, $name, -1) + 1;
+
+        return $this->generatedNames[$name] == 0
+            ? $name
+            : $name . " (" . $this->generatedNames[$name] . ")";
     }
 }

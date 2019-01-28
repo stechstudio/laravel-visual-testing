@@ -43,11 +43,11 @@ Next:
 
 ## How to use
 
-You can now call `percySnapshot('snapshot-name')` on the browser instance in any of your dusk tests. 
+To take a snapshot call `percySnapshot()` on the browser instance in any of your dusk tests. 
 
 ```php
 $browser->visit('/auth/login')
-    ->percySnapshot('login-page');
+    ->percySnapshot();
 ```
 
 Then run your test suite like your normally would.
@@ -56,11 +56,20 @@ Then run your test suite like your normally would.
 php artisan dusk
 ```
 
-## Disabling percy snapshots
+### Naming your snapshots
+
+By default the name of your snapshot will be the relative URL of the page (e.g. `/auth/login`). You can optionally pass in a name when taking the snapshot.
+
+```php
+$browser->visit('/auth/login')
+    ->percySnapshot('Login page');
+```
+
+### Disabling percy snapshots
 
 If you want to run your tests without snapshots, use the `--without-percy` command line option.
 
-## Selecting base build branch
+### Selecting base build branch
 
 [Percy uses a variety of strategies to determine the optimal base build for comparison](https://docs.percy.io/docs/baseline-picking-logic).
 

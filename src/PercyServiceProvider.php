@@ -44,7 +44,7 @@ class PercyServiceProvider extends ServiceProvider
             return new Agent(config('percy.agent_path'), config('percy.client_info'));
         });
 
-        Browser::macro('percySnapshot', function ($name, $options = []) {
+        Browser::macro('percySnapshot', function ($name = null, $options = []) {
             return app(Agent::class)->snapshot($this, $name, $options);
         });
     }
