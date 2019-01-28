@@ -18,18 +18,18 @@
     },
     "autoload": {
         "psr-4": {
-            "STS\\Percy\\": "src"
+            "STS\\VisualTesting\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "STS\\Percy\\Tests\\": "tests"
+            "STS\\VisualTesting\\Tests\\": "tests"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "STS\\Percy\\PercyServiceProvider"
+                "STS\\VisualTesting\\ServiceProvider"
             ]
         }
     }

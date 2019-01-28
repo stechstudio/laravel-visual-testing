@@ -1,6 +1,6 @@
 <?php
 
-namespace STS\Percy\Console;
+namespace STS\VisualTesting\Console;
 
 class DuskFailsCommand extends DuskCommand
 {
@@ -24,7 +24,8 @@ class DuskFailsCommand extends DuskCommand
     /**
      * Get the array of arguments for running PHPUnit.
      *
-     * @param  array  $options
+     * @param  array $options
+     *
      * @return array
      */
     protected function phpunitArguments($options)

@@ -1,5 +1,6 @@
 <?php
-namespace STS\Percy\Console;
+
+namespace STS\VisualTesting\Console;
 
 use Laravel\Dusk\Console\DuskCommand as BaseDuskCommand;
 use Symfony\Component\Process\Process;
@@ -17,7 +18,6 @@ class DuskCommand extends BaseDuskCommand
                             {--without-percy : Disable percy snapshots}
                             {--percy-target-branch : Set the base branch for comparison}';
 
-
     /**
      * Execute the console command.
      *
@@ -33,9 +33,9 @@ class DuskCommand extends BaseDuskCommand
             $process = $this->process();
 
             try {
-                $process->setTty(! $this->option('without-tty'));
+                $process->setTty(!$this->option('without-tty'));
             } catch (RuntimeException $e) {
-                $this->output->writeln('Warning: '.$e->getMessage());
+                $this->output->writeln('Warning: ' . $e->getMessage());
             }
 
             return $process->run(function ($type, $line) {
@@ -51,7 +51,7 @@ class DuskCommand extends BaseDuskCommand
      */
     protected function binary()
     {
-        if($this->option('without-percy')) {
+        if ($this->option('without-percy')) {
             return parent::binary();
         }
 
@@ -69,7 +69,7 @@ class DuskCommand extends BaseDuskCommand
     protected function env()
     {
         return array_filter([
-            'PERCY_TOKEN' => env('PERCY_TOKEN'),
+            'PERCY_TOKEN'         => env('PERCY_TOKEN'),
             'PERCY_TARGET_BRANCH' => $this->baseBranch()
         ]);
     }

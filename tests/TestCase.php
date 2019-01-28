@@ -1,14 +1,11 @@
 <?php
-namespace STS\Percy\Tests;
+namespace STS\VisualTesting\Tests;
 
 use Facebook\WebDriver\Remote\RemoteWebDriver;
 use Laravel\Dusk\Browser;
-use STS\Percy\Agent;
-use STS\Percy\PercyServiceProvider;
+use STS\VisualTesting\Agent;
+use STS\VisualTesting\VisualTestingServiceProvider;
 
-/**
- *
- */
 class TestCase extends \Orchestra\Testbench\TestCase
 {
     /**
@@ -18,7 +15,7 @@ class TestCase extends \Orchestra\Testbench\TestCase
      */
     protected function getPackageProviders($app)
     {
-        return [PercyServiceProvider::class];
+        return [VisualTestingServiceProvider::class];
     }
 
     /**
@@ -30,7 +27,7 @@ class TestCase extends \Orchestra\Testbench\TestCase
 
         // Always need a dummy agent file in place
         file_put_contents(sys_get_temp_dir() . '/percy-agent.js', "");
-        config(['percy.agent_path' => sys_get_temp_dir() . '/percy-agent.js']);
+        config(['visual-testing.percy.agent_path' => sys_get_temp_dir() . '/percy-agent.js']);
     }
 
     /**

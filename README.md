@@ -44,11 +44,11 @@ Next:
 
 ## How to use
 
-To take a snapshot call `percySnapshot()` on the browser instance in any of your dusk tests. 
+To take a snapshot call `snapshot()` on the browser instance in any of your dusk tests. 
 
 ```php
 $browser->visit('/auth/login')
-        ->percySnapshot();
+        ->snapshot();
 ```
 
 Then run your test suite like your normally would.
@@ -63,7 +63,7 @@ By default the name of your snapshot will be the relative URL of the page (e.g. 
 
 ```php
 $browser->visit('/auth/login')
-        ->percySnapshot('Login page');
+        ->snapshot('Login page');
 ```
 
 ### Snapshot options
@@ -75,7 +75,7 @@ You can pass in an array of options when taking a snapshot:
 
 ```php
 $browser->visit('/auth/login')
-        ->percySnapshot('Login page', [ widths: [768, 992, 1200] ]);
+        ->snapshot('Login page', [ widths: [768, 992, 1200] ]);
 ```
 
 ### Disabling snapshots
@@ -90,14 +90,14 @@ You can override this and specify your own base build by setting `PERCY_TARGET_B
 
 ## Example
 
-Open the example test at `tests/Browser/ExampleTest.php`. Add a call to `percySnapshot()` right after the `visit`, and pass in a name for your snapshot.
+Open the example test at `tests/Browser/ExampleTest.php`. Add a call to `snapshot()` right after the `visit`, and pass in a name for your snapshot.
 
 ```php
 public function testBasicExample()
 {
     $this->browse(function (Browser $browser) {
         $browser->visit('/')
-            ->percySnapshot('basic-example') // <-- add this
+            ->snapshot('basic-example') // <-- add this
             ->assertSee('Laravel');
                 
     });

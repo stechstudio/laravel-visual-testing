@@ -1,13 +1,13 @@
 <?php
 
-namespace STS\Percy;
+namespace STS\VisualTesting;
 
-use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 use Laravel\Dusk\Browser;
-use STS\Percy\Console\DuskCommand;
-use STS\Percy\Console\DuskFailsCommand;
+use STS\VisualTesting\Console\DuskCommand;
+use STS\VisualTesting\Console\DuskFailsCommand;
 
-class PercyServiceProvider extends ServiceProvider
+class VisualTestingServiceProvider extends BaseServiceProvider
 {
     /**
      * Bootstrap any package services.
@@ -17,7 +17,7 @@ class PercyServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__ . '/../config/percy.php' => config_path('percy.php'),
+            __DIR__ . '/../config/visual-testing.php' => config_path('visual-testing.php'),
         ]);
     }
 
@@ -29,7 +29,7 @@ class PercyServiceProvider extends ServiceProvider
     public function register()
     {
         $this->mergeConfigFrom(
-            __DIR__ . '/../config/percy.php', 'percy'
+            __DIR__ . '/../config/visual-testing.php', 'visual-testing'
         );
 
         // Extend and override the base dusk commands
@@ -42,14 +42,14 @@ class PercyServiceProvider extends ServiceProvider
 
         $this->app->singleton(Agent::class, function () {
             return new Agent(
-                config('percy.agent_path'),
-                config('percy.client_info'),
-                config('percy.environment_info'),
-                config('percy.snapshot_options')
+                config('visual-testing.percy.agent_path'),
+                config('visual-testing.percy.client_info'),
+                config('visual-testing.percy.environment_info'),
+                config('visual-testing.percy.snapshot_options')
             );
         });
 
-        Browser::macro('percySnapshot', function ($name = null, $options = []) {
+        Browser::macro('snapshot', function ($name = null, $options = []) {
             return app(Agent::class)->snapshot($this, $name, $options);
         });
     }

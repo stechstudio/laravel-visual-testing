@@ -1,6 +1,6 @@
 <?php
 
-namespace STS\Percy;
+namespace STS\VisualTesting;
 
 use Illuminate\Contracts\Support\Arrayable;
 
@@ -29,7 +29,7 @@ class Script implements Arrayable
     /**
      * @return mixed
      */
-    public function getJsAgent()
+    public function jsAgent()
     {
         return $this->jsAgent;
     }
@@ -37,7 +37,7 @@ class Script implements Arrayable
     /**
      * @return mixed
      */
-    public function getAgentOptions()
+    public function agentOptions()
     {
         return $this->agentOptions;
     }
@@ -45,7 +45,7 @@ class Script implements Arrayable
     /**
      * @return mixed
      */
-    public function getSnapshotName()
+    public function snapshotName()
     {
         return $this->snapshotName;
     }
@@ -53,7 +53,7 @@ class Script implements Arrayable
     /**
      * @return mixed
      */
-    public function getSnapshotOptions()
+    public function snapshotOptions()
     {
         return $this->snapshotOptions;
     }
@@ -64,15 +64,13 @@ class Script implements Arrayable
     public function toArray()
     {
         return [
-            $this->getJsAgent(),
+            $this->jsAgent(),
             sprintf(
                 "const percyAgentClient = new PercyAgent('%s'); percyAgentClient.snapshot(%s, %s);",
-                json_encode($this->getAgentOptions()),
-                json_encode($this->getSnapshotName()),
-                json_encode($this->getSnapshotOptions())
+                json_encode($this->agentOptions()),
+                json_encode($this->snapshotName()),
+                json_encode($this->snapshotOptions())
             )
         ];
     }
-
-
 }

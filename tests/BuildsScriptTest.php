@@ -1,6 +1,6 @@
 <?php
 
-namespace STS\Percy\Tests;
+namespace STS\VisualTesting\Tests;
 
 class BuildsScriptTest extends TestCase
 {
@@ -8,7 +8,7 @@ class BuildsScriptTest extends TestCase
     {
         file_put_contents(sys_get_temp_dir() . '/percy-agent.js', "this is percy");
         config([
-            'percy' => [
+            'visual-testing.percy' => [
                 'agent_path' => sys_get_temp_dir() . '/percy-agent.js',
                 'client_info' => 'testing',
                 'environment_info' => 'phpunit',
@@ -20,31 +20,31 @@ class BuildsScriptTest extends TestCase
 
         $script = $this->agent()->getScript($this->browser());
 
-        $this->assertEquals("this is percy", $script->getJsAgent());
-        $this->assertEquals("testing", $script->getAgentOptions()['clientInfo']);
-        $this->assertEquals("phpunit", $script->getAgentOptions()['environmentInfo']);
-        $this->assertEquals([500, 600], $script->getSnapshotOptions()['widths']);
+        $this->assertEquals("this is percy", $script->jsAgent());
+        $this->assertEquals("testing", $script->agentOptions()['clientInfo']);
+        $this->assertEquals("phpunit", $script->agentOptions()['environmentInfo']);
+        $this->assertEquals([500, 600], $script->snapshotOptions()['widths']);
     }
 
     public function test_runtime_config()
     {
-        config(['percy.snapshot_options' => [ 'widths' => [100, 200] ] ]);
+        config(['visual-testing.percy.snapshot_options' => [ 'widths' => [100, 200] ] ]);
 
         $script = $this->agent()->getScript($this->browser(), 'snapshot-name', [ 'widths' => [600, 700] ]);
 
-        $this->assertEquals('snapshot-name', $script->getSnapshotName());
-        $this->assertEquals([600, 700], $script->getSnapshotOptions()['widths']);
+        $this->assertEquals('snapshot-name', $script->snapshotName());
+        $this->assertEquals([600, 700], $script->snapshotOptions()['widths']);
     }
 
     public function test_generated_snapshot_name()
     {
         $script = $this->agent()->getScript($this->browser());
-        $this->assertEquals('/test', $script->getSnapshotName());
+        $this->assertEquals('/test', $script->snapshotName());
 
         $script = $this->agent()->getScript($this->browser());
-        $this->assertEquals('/test (1)', $script->getSnapshotName());
+        $this->assertEquals('/test (1)', $script->snapshotName());
 
         $script = $this->agent()->getScript($this->browser());
-        $this->assertEquals('/test (2)', $script->getSnapshotName());
+        $this->assertEquals('/test (2)', $script->snapshotName());
     }
 }

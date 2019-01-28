@@ -1,6 +1,6 @@
 <?php
 
-namespace STS\Percy;
+namespace STS\VisualTesting;
 
 use Laravel\Dusk\Browser;
 
@@ -67,7 +67,7 @@ class Agent
         return new Script(
             file_get_contents($this->jsAgentPath),
             [
-                'clientInfo' => $this->clientInfo,
+                'clientInfo'      => $this->clientInfo,
                 'environmentInfo' => $this->environmentInfo
             ],
             $this->name($browser, $name),
