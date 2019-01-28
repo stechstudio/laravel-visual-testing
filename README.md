@@ -1,9 +1,9 @@
 # Visual UI testing for Laravel Dusk
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/stechstudio/laravel-percy.svg?style=flat-square)](https://packagist.org/packages/stechstudio/laravel-percy)
-[![Build Status](https://img.shields.io/travis/stechstudio/laravel-percy/master.svg?style=flat-square)](https://travis-ci.org/stechstudio/laravel-percy)
-[![Quality Score](https://img.shields.io/scrutinizer/g/stechstudio/laravel-percy.svg?style=flat-square)](https://scrutinizer-ci.com/g/stechstudio/laravel-percy)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/stechstudio/laravel-visual-testing.svg?style=flat-square)](https://packagist.org/packages/stechstudio/laravel-visual-testing)
+[![Build Status](https://img.shields.io/travis/stechstudio/laravel-visual-testing/master.svg?style=flat-square)](https://travis-ci.org/stechstudio/laravel-visual-testing)
+[![Quality Score](https://img.shields.io/scrutinizer/g/stechstudio/laravel-visual-testing.svg?style=flat-square)](https://scrutinizer-ci.com/g/stechstudio/laravel-visual-testing)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
-[![Total Downloads](https://img.shields.io/packagist/dt/stechstudio/laravel-percy.svg?style=flat-square)](https://packagist.org/packages/stechstudio/laravel-percy)
+[![Total Downloads](https://img.shields.io/packagist/dt/stechstudio/laravel-visual-testing.svg?style=flat-square)](https://packagist.org/packages/stechstudio/laravel-visual-testing)
 
 
 This package extends Dusk with the ability to do visual diffs with the [Percy visual testing](https://percy.io/) platform.
@@ -39,7 +39,7 @@ Next:
 3. Install this composer package.
 
     ```
-    composer require stechstudio/laravel-percy --dev
+    composer require stechstudio/laravel-visual-testing --dev
     ```
 
 ## How to use

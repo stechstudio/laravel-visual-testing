@@ -1,6 +1,6 @@
 {
-    "name": "stechstudio/laravel-percy",
-    "description": "Integrates percy.io with Laravel Dusk for easy snapshot testing",
+    "name": "stechstudio/laravel-visual-testing",
+    "description": "Visual UI testing for Laravel Dusk using percy.io",
     "type": "library",
     "license": "MIT",
     "authors": [
