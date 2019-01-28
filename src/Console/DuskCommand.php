@@ -40,7 +40,7 @@ class DuskCommand extends BaseDuskCommand
 
             return $process->run(function ($type, $line) {
                 $this->output->write($line);
-            });
+            }, $this->env());
         });
     }
 
@@ -91,7 +91,7 @@ class DuskCommand extends BaseDuskCommand
     {
         return (new Process(array_merge(
             $this->binary(), $this->phpunitArguments($this->processOptions())
-        ), null, $this->env()))->setTimeout(null);
+        )))->setTimeout(null);
     }
 
     /**
