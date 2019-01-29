@@ -12,8 +12,8 @@ class DuskFailsCommand extends DuskCommand
     protected $signature = 'dusk:fails
                             {--without-tty : Disable output to TTY}
                             {--without-percy : Disable percy snapshots}
-                            {--percy-target-branch : Set the base branch for comparison}
-                            {--percy-target-commit : Set the base commit SHA for comparison}';
+                            {--percy-target-branch= : Set the base branch for comparison}
+                            {--percy-target-commit= : Set the base commit SHA for comparison}';
 
     /**
      * The console command description.
