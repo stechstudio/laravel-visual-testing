@@ -83,9 +83,12 @@ If you want to run your tests without snapshots, use the `--without-percy` comma
 
 ### Selecting base build branch
 
-[Percy uses a variety of strategies to determine the optimal base build for comparison](https://docs.percy.io/docs/baseline-picking-logic).
+Percy uses a variety of strategies to determine the optimal base build for comparison. For details see [Base build selection](https://docs.percy.io/docs/baseline-picking-logic).
 
-You can override this and specify your own base build by setting `PERCY_TARGET_BRANCH` in your .env file, or using the command line option `--percy-target-branch`.
+If you want to override and specify your own base you have two options:
+
+- `--percy-target-branch` : Specify base by branch name
+- `--percy-target-commit` : Specify by target commit SHA (only works if there is a finished Percy build for that commit)
 
 ## Example
 
