@@ -71,26 +71,9 @@ class DuskCommand extends BaseDuskCommand
     {
         return array_filter([
             'PERCY_TOKEN'         => env('PERCY_TOKEN'),
-            'PERCY_TARGET_BRANCH' => $this->baseBranch(),
-            'PERCY_TARGET_COMMIT' => $this->targetCommit()
+            'PERCY_TARGET_BRANCH' => $this->option('percy-target-branch'),
+            'PERCY_TARGET_COMMIT' => $this->option('percy-target-commit')
         ]);
-    }
-
-    /**
-     * @return string|null
-     */
-    protected function baseBranch()
-    {
-        return $this->hasOption('percy-target-branch')
-            ? $this->option('percy-target-branch')
-            : env('PERCY_TARGET_BRANCH');
-    }
-
-    protected function targetCommit()
-    {
-        return $this->hasOption('percy-target-commit')
-            ? $this->option('percy-target-commit')
-            : env('PERCY_TARGET_COMMIT');
     }
 
     /**
