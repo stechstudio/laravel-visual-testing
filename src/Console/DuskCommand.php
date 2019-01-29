@@ -70,7 +70,6 @@ class DuskCommand extends BaseDuskCommand
     protected function env()
     {
         return array_filter([
-            'PERCY_TOKEN'         => env('PERCY_TOKEN'),
             'PERCY_TARGET_BRANCH' => $this->option('percy-target-branch'),
             'PERCY_TARGET_COMMIT' => $this->option('percy-target-commit')
         ]);
