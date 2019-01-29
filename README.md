@@ -90,7 +90,7 @@ If you want to override and specify your own base you have two options:
 - `--percy-target-branch` : Specify base by branch name
 - `--percy-target-commit` : Specify by target commit SHA (only works if there is a finished Percy build for that commit)
 
-## Simple example
+## Basic example
 
 Open the example test at `tests/Browser/ExampleTest.php`. Add a call to `snapshot()` right after the `visit`, and pass in a name for your snapshot.
 
