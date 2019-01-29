@@ -16,7 +16,8 @@ class DuskCommand extends BaseDuskCommand
     protected $signature = 'dusk 
                             {--without-tty : Disable output to TTY}
                             {--without-percy : Disable percy snapshots}
-                            {--percy-target-branch : Set the base branch for comparison}';
+                            {--percy-target-branch : Set the base branch for comparison}
+                            {--percy-target-commit : Set the base commit SHA for comparison}';
 
     /**
      * Execute the console command.
@@ -70,7 +71,8 @@ class DuskCommand extends BaseDuskCommand
     {
         return array_filter([
             'PERCY_TOKEN'         => env('PERCY_TOKEN'),
-            'PERCY_TARGET_BRANCH' => $this->baseBranch()
+            'PERCY_TARGET_BRANCH' => $this->baseBranch(),
+            'PERCY_TARGET_COMMIT' => $this->targetCommit()
         ]);
     }
 
@@ -82,6 +84,13 @@ class DuskCommand extends BaseDuskCommand
         return $this->hasOption('percy-target-branch')
             ? $this->option('percy-target-branch')
             : env('PERCY_TARGET_BRANCH');
+    }
+
+    protected function targetCommit()
+    {
+        return $this->hasOption('percy-target-commit')
+            ? $this->option('percy-target-commit')
+            : env('PERCY_TARGET_COMMIT');
     }
 
     /**
@@ -101,7 +110,7 @@ class DuskCommand extends BaseDuskCommand
     {
         return array_diff(
             array_slice($_SERVER['argv'], 2),
-            ['--without-tty', '--without-percy', '--percy-target-branch']
+            ['--without-tty', '--without-percy', '--percy-target-branch', '--percy-target-commit']
         );
     }
 }
