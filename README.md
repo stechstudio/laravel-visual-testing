@@ -3,7 +3,7 @@
 [![Build Status](https://img.shields.io/travis/stechstudio/laravel-visual-testing/master.svg?style=flat-square)](https://travis-ci.org/stechstudio/laravel-visual-testing)
 [![Quality Score](https://img.shields.io/scrutinizer/g/stechstudio/laravel-visual-testing.svg?style=flat-square)](https://scrutinizer-ci.com/g/stechstudio/laravel-visual-testing)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
-[![Total Downloads](https://img.shields.io/packagist/dt/stechstudio/laravel-visual-testing.svg?style=flat-square)](https://packagist.org/packages/stechstudio/laravel-visual-testing)
+<!--- [![Total Downloads](https://img.shields.io/packagist/dt/stechstudio/laravel-visual-testing.svg?style=flat-square)](https://packagist.org/packages/stechstudio/laravel-visual-testing) -->
 
 This package extends Dusk with the ability to do visual diffs with the [Percy visual testing](https://percy.io/) platform.
 
@@ -74,7 +74,7 @@ You can pass in an array of options when taking a snapshot:
 
 ```php
 $browser->visit('/auth/login')
-        ->snapshot('Login page', [ widths: [768, 992, 1200] ]);
+        ->snapshot('Login page', [ 'widths': [768, 992, 1200] ]);
 ```
 
 ### Disabling snapshots
