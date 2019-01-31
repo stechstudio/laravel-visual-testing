@@ -66,7 +66,7 @@ class Script implements Arrayable
         return [
             $this->jsAgent(),
             sprintf(
-                "const percyAgentClient = new PercyAgent('%s'); percyAgentClient.snapshot(%s, %s);",
+                "const percyAgentClient = new PercyAgent(%s); percyAgentClient.snapshot(%s, %s);",
                 json_encode($this->agentOptions()),
                 json_encode($this->snapshotName()),
                 json_encode($this->snapshotOptions())

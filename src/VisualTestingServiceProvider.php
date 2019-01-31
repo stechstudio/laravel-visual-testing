@@ -43,7 +43,7 @@ class VisualTestingServiceProvider extends BaseServiceProvider
         $this->app->singleton(Agent::class, function () {
             return new Agent(
                 config('visual-testing.percy.agent_path'),
-                config('visual-testing.percy.client_info'),
+                $this->clientInfo(),
                 config('visual-testing.percy.environment_info'),
                 config('visual-testing.percy.snapshot_options')
             );
@@ -60,5 +60,31 @@ class VisualTestingServiceProvider extends BaseServiceProvider
     public function provides()
     {
         return [Agent::class];
+    }
+
+    /**
+     * @return string
+     */
+    protected function clientInfo()
+    {
+        return "stechstudio/laravel-visual-testing/" . $this->packageVersion();
+    }
+
+    /**
+     * @return string
+     */
+    protected function packageVersion()
+    {
+        if(!file_exists(base_path("composer.lock"))) {
+            return '';
+        }
+
+        $composer = json_decode(file_get_contents(base_path("composer.lock")), true);
+
+        return collect($composer['packages'])
+            ->merge($composer['packages-dev'])
+            ->where("name", "stechstudio/laravel-visual-testing")
+            ->pluck("version")
+            ->first();
     }
 }
