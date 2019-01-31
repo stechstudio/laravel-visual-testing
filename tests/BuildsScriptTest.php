@@ -10,8 +10,6 @@ class BuildsScriptTest extends TestCase
         config([
             'visual-testing.percy' => [
                 'agent_path' => sys_get_temp_dir() . '/percy-agent.js',
-                'client_info' => 'testing',
-                'environment_info' => 'phpunit',
                 'snapshot_options' => [
                     'widths' => [500, 600]
                 ]
@@ -21,8 +19,6 @@ class BuildsScriptTest extends TestCase
         $script = $this->agent()->getScript($this->browser());
 
         $this->assertEquals("this is percy", $script->jsAgent());
-        $this->assertEquals("testing", $script->agentOptions()['clientInfo']);
-        $this->assertEquals("phpunit", $script->agentOptions()['environmentInfo']);
         $this->assertEquals([500, 600], $script->snapshotOptions()['widths']);
     }
 
