@@ -10,7 +10,7 @@
         }
     ],
     "require": {
-        "laravel/dusk": "1.*|2.*|3.*|4.*"
+        "laravel/dusk": "1.*|2.*|3.*|4.*|5.*"
     },
     "require-dev": {
         "orchestra/testbench": "^3.7",
