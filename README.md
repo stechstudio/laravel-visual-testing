@@ -74,7 +74,7 @@ You can pass in an array of options when taking a snapshot:
 
 ```php
 $browser->visit('/auth/login')
-        ->snapshot('Login page', [ 'widths': [768, 992, 1200] ]);
+        ->snapshot('Login page', [ 'widths' => [768, 992, 1200] ]);
 ```
 
 ### Disabling snapshots
