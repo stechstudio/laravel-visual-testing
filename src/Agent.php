@@ -2,6 +2,7 @@
 
 namespace STS\VisualTesting;
 
+use Illuminate\Support\Arr;
 use Laravel\Dusk\Browser;
 
 class Agent
@@ -107,7 +108,7 @@ class Agent
     {
         $name = str_replace($browser::$baseUrl, '', $browser->driver->getCurrentURL());
 
-        $this->generatedNames[$name] = array_get($this->generatedNames, $name, -1) + 1;
+        $this->generatedNames[$name] = Arr::get($this->generatedNames, $name, -1) + 1;
 
         return $this->generatedNames[$name] == 0
             ? $name
