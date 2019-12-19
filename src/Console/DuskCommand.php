@@ -2,6 +2,7 @@
 
 namespace STS\VisualTesting\Console;
 
+use Illuminate\Support\Str;
 use Laravel\Dusk\Console\DuskCommand as BaseDuskCommand;
 use Symfony\Component\Process\Process;
 use Symfony\Component\Process\Exception\RuntimeException;
@@ -13,7 +14,7 @@ class DuskCommand extends BaseDuskCommand
      *
      * @var string
      */
-    protected $signature = 'dusk 
+    protected $signature = 'dusk
                             {--without-tty : Disable output to TTY}
                             {--without-percy : Disable percy snapshots}
                             {--percy-target-branch= : Set the base branch for comparison}
@@ -91,7 +92,7 @@ class DuskCommand extends BaseDuskCommand
     protected function processOptions()
     {
         return array_filter(array_slice($_SERVER['argv'], 2), function($param) {
-            return !starts_with($param, ['--without-tty', '--without-percy', '--percy-target-branch', '--percy-target-commit']);
+            return !Str::startsWith($param, ['--without-tty', '--without-percy', '--percy-target-branch', '--percy-target-commit']);
         });
     }
 }
