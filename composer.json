@@ -10,11 +10,11 @@
         }
     ],
     "require": {
-        "laravel/dusk": "1.*|2.*|3.*|4.*|5.*|6.*"
+        "laravel/dusk": "^6.0"
     },
     "require-dev": {
-        "orchestra/testbench": "^3.7",
-        "phpunit/phpunit": "^7.5"
+        "orchestra/testbench": "^6.0",
+        "phpunit/phpunit": "^9.0"
     },
     "autoload": {
         "psr-4": {
