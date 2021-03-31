@@ -19,6 +19,14 @@ class VisualTestingServiceProvider extends BaseServiceProvider
         $this->publishes([
             __DIR__ . '/../config/visual-testing.php' => config_path('visual-testing.php'),
         ]);
+
+        // Extend and override the base dusk commands
+        if ($this->app->runningInConsole()) {
+            $this->commands([
+                DuskCommand::class,
+                DuskFailsCommand::class
+            ]);
+        }
     }
 
     /**
@@ -31,14 +39,6 @@ class VisualTestingServiceProvider extends BaseServiceProvider
         $this->mergeConfigFrom(
             __DIR__ . '/../config/visual-testing.php', 'visual-testing'
         );
-
-        // Extend and override the base dusk commands
-        if ($this->app->runningInConsole()) {
-            $this->commands([
-                DuskCommand::class,
-                DuskFailsCommand::class
-            ]);
-        }
 
         $this->app->singleton(Agent::class, function () {
             return new Agent(
