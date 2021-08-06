@@ -16,6 +16,7 @@ class DuskCommand extends BaseDuskCommand
      */
     protected $signature = 'dusk
                             {--without-tty : Disable output to TTY}
+                            {--pest : Run the tests using Pest}
                             {--without-percy : Disable percy snapshots}
                             {--percy-target-branch= : Set the base branch for comparison}
                             {--percy-target-commit= : Set the base commit SHA for comparison}';
@@ -92,7 +93,7 @@ class DuskCommand extends BaseDuskCommand
     protected function processOptions()
     {
         return array_filter(array_slice($_SERVER['argv'], 2), function($param) {
-            return !Str::startsWith($param, ['--without-tty', '--without-percy', '--percy-target-branch', '--percy-target-commit']);
+            return !Str::startsWith($param, ['--without-tty', '--pest', '--without-percy', '--percy-target-branch', '--percy-target-commit']);
         });
     }
 }
